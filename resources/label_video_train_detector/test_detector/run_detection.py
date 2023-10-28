@@ -21,13 +21,13 @@ def main(write_result=False):
     tracker = SimpleObjectTracker(0.7)
     tracker.min_conf_first_object = 0.9
     video_file_name = "/mnt/hdd/__Docencia/DataAnalysisWithPython/!!2023SepUH/lectures/resources/label_video_train_detector/hormigas.mp4"
-    output_video_name = "/mnt/hdd/__Docencia/DataAnalysisWithPython/!!2023SepUH/lectures/resources/label_video_train_detector/hormigas_track{}.avi"
+    # output_video_name = "/mnt/hdd/__Docencia/DataAnalysisWithPython/!!2023SepUH/lectures/resources/label_video_train_detector/hormigas_track{}.avi"
     start_frame_idx = 0
 
     pipeline = Pipeline(
         source=VideoBasedSource(((video_file_name, "Chan1"),), start_frame_idx),
         processors=[
-#            WaitIfGpuHot(79, 3, 30),
+            # WaitIfGpuHot(79, 3, 30),
             GetDetectionProcessor(detector),
             CameraTrackerProcessor(tracker, "Chan1"),
 
@@ -41,12 +41,11 @@ def main(write_result=False):
             FpsCalculator(),
             ShowCamerasInWindowsSink('image_tracklets', "tracklets"),
             ShowCamerasInWindowsSink('image_detections', "detections"),
-            WriteCamerasToVideoSink("image_tracklets", output_video_name, 30),
+            # WriteCamerasToVideoSink("image_tracklets", output_video_name, 30),
             WaitForKeySink(0)
         ]
     )
     pipeline.run_k(500)
-
 
 
 main()

@@ -334,7 +334,7 @@ try:
     file_name = sys.argv[1]
     show_width = int(sys.argv[2])
     show_height = int(sys.argv[3])
-    w = MainWindow(file_name, show_size=(1900, 900))
+    w = MainWindow(file_name, show_size=(show_width, show_height))
     w.run()
 except Exception as exc:
     print("Correct usage: python3 annot_video.py file_name show_width show_height")
